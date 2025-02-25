@@ -1,4 +1,4 @@
-package Lectures;
+package Lectures.JavaFun;
 
 public class Main {
     //methods

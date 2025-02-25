@@ -1,4 +1,4 @@
-package Lectures;
+package Lectures.JavaFun;
 
 import java.util.*;
 // iIn this class we will see Fixed Array, Array List and HashMaps
