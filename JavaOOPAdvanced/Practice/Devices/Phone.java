@@ -15,7 +15,7 @@ public class Phone extends Device{
     }
 
     public void charge(){
-        System.out.println("You are charging your phone.");
+        System.out.println("You are charging your device.");
         battery += 50;
         status();
     }

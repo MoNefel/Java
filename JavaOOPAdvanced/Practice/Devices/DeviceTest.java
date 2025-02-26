@@ -8,11 +8,11 @@ public class DeviceTest {
         phone.makeCall();
         phone.makeCall();
         phone.makeCall();
-        phone.makeCall();
 
         phone.playGame();
         phone.playGame();
 
+        phone.charge();
         phone.charge();
     }
     
