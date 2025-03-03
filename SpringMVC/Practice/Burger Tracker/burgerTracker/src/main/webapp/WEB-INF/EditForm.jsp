@@ -12,33 +12,16 @@
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
-<title>Burger Traker</title>
+<title>Update Burger</title>
 </head>
-<body style="margin: 10vw;">
-	<h1>Burger Tracker</h1>
-	<table class="table table-striped table-bordered">
-		<thead>
-			<tr>
-				<th>Burger Name</th>
-				<th>Restaurant Name</th>
-				<th>Rating (out of 5)</th>
-				<th>Action</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="burger" items="${burgers}">
-				<tr>
-					<td><c:out value="${burger.name}" /></td>
-					<td><c:out value="${burger.restaurant}" /></td>
-					<td><c:out value="${burger.rating}" /></td>
-					<td><a href="/burger/${burger.id }/edit">Edit</a></td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	<br>
-	<h2>Add new burger</h2>
-	<form:form action="/burger" mode="post" modelAttribute="burger">
+<body >
+<div class="d-flex justify-content-around align-items-center">
+	<h2>Edit burger</h2>
+	<a href="/">Go Back</a>
+	</div>
+	<div style="margin: 5vw;">
+	<form:form action="/burger/${id}" method="put" modelAttribute="burger">
+		<!-- <input type="hidden" name="_method" value="put"> -->
 		<div>
 			<form:label path="name">Burger Name:</form:label>
 			<br>
@@ -63,9 +46,11 @@
 			<form:errors path="notes" class="text-danger" />
 			<form:textarea path="notes" rows="3" style="width:250px;" />
 		</div>
+
 		<div>
 			<input type="submit" value="Submit" />
 		</div>
 	</form:form>
+	</div>
 </body>
 </html>

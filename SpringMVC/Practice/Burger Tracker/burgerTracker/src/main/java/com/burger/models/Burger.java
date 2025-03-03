@@ -16,7 +16,7 @@ public class Burger {
 	private Long id;
 
 	@NotNull
-	@Size(min = 1, max = 255, message = "Burger name must not be null")
+	@Size(min = 2, max = 255, message = "Burger name must not be null")
 	private String name;
 
 	@NotNull
@@ -29,7 +29,7 @@ public class Burger {
 	private int rating;
 
 	@NotNull
-	@Size(min = 1, max = 255, message = "Notes must not be empty")
+	@Size(min = 2, max = 255, message = "Notes must not be empty")
 	private String notes;
 
 	@Column(updatable = false)
