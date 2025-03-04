@@ -1,18 +1,16 @@
-package com.springMvc.models;
-
-
+package com.ninjas.models;
 
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
-
 @Entity
-@Table(name="users")
-public class User {
+@Table(name = "dojos")
+public class Dojo {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,9 +19,11 @@ public class User {
 	@NotBlank
 	private String name;
 	
-	private String email;
+	@NotBlank
+	private String city;
 	
-	private Integer password;
+	@OneToMany(mappedBy="dojo", fetch = FetchType.LAZY)
+    private List<Ninja> ninjas;
 	
 	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -31,12 +31,6 @@ public class User {
 		
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updatedAt;
-	
-	@OneToOne(mappedBy="owner", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-    private License license;
-	
-	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Car> cars;
 	
 	@PrePersist
 	protected void onCreate() {
@@ -48,7 +42,7 @@ public class User {
 		this.updatedAt = new Date();
 	}
 
-	public User() {}
+	public Dojo() {}
 
 	public Long getId() {
 		return id;
@@ -65,22 +59,24 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public List<Ninja> getNinjas() {
+		return ninjas;
+	}
+
+	public void setNinjas(List<Ninja> ninjas) {
+		this.ninjas = ninjas;
+	}
 	
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Integer getPassword() {
-		return password;
-	}
-
-	public void setPassword(Integer password) {
-		this.password = password;
-	}
+	
 	
 	
 	
