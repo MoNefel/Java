@@ -8,19 +8,23 @@
 <title>User</title>
 </head>
 <body>
+	<%-- 	<h1>
+		Welcome,
+		<c:out value="${user.userName}" />
+		!
+	</h1> --%>
 	<h1>All Users</h1>
 	<a href="/user/new">Create User</a>
 
 	<c:forEach var="oneUser" items="${allUsers}">
 		<div>
 			<hr>
-			<h2>UserName : ${oneUser.name}</h2>
-
-			<h2>PassWord : ${oneUser.password}</h2>
-
-			<h2>UserEmail : ${oneUser.getEmail() }</h2>
-			<a href="/user/${oneUser.id}/edit">Edit</a>
-			<a href="user/${oneUser.id}" >Delete</a>
+			<h2>UserName : ${oneUser.userName}</h2>
+			<h2>UserEmail : ${oneUser.getEmail()}</h2>
+			<h2>${sessionScope.userId }</h2>
+			<h2>${oneUser.id }</h2>
+			<a href="/user/${oneUser.id}/edit">Edit</a> <a
+				href="user/${oneUser.id}">Delete</a>
 			<hr>
 		</div>
 	</c:forEach>

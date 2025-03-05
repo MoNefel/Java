@@ -14,9 +14,9 @@
 	<form:form action="/user/${id}" method="put" modelAttribute="user" class="form col-6 mx-auto">
 <!-- 	<input type="hidden" name="_method" value="put"> -->
 		<div class="form-control">
-			<form:label path="name">Name</form:label>
-			<form:errors path="name" />
-			<form:input path="name" />
+			<form:label path="userName">User Name</form:label>
+			<form:errors path="userName" />
+			<form:input path="userName" />
 		</div>
 		<div class="form-control">
 			<form:label path="email">Email</form:label>

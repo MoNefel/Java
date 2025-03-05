@@ -19,9 +19,9 @@
 	<h1>Create User</h1>
 	<form:form action="/user" method="post" modelAttribute="user" class="form col-6 mx-auto">
 		<div class="form-control">
-			<form:label path="name">Name</form:label>
-			<form:errors path="name" />
-			<form:input path="name" />
+			<form:label path="userName">User Name</form:label>
+			<form:errors path="userName" />
+			<form:input path="userName" />
 		</div>
 		<div class="form-control">
 			<form:label path="email">Email</form:label>
