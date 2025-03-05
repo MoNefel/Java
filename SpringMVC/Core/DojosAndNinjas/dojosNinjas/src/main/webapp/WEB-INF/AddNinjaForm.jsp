@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>Add Ninja</title>
 </head>
-<body class="d-flex">
+<body >
 	<h1>Add Ninja</h1>
 	<form:form action="/ninja" method="post" modelAttribute="ninja"
 		class="form col-6 mx-auto">
