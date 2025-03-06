@@ -3,16 +3,10 @@ package com.book.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
-import com.book.models.Book;
-import com.book.models.User;
-import com.book.models.UserLogin;
-import com.book.services.BookService;
-import com.book.services.UserService;
+import com.book.models.*;
+import com.book.services.*;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -99,17 +93,75 @@ public class MainController {
 		bookSer.addBook(book);
 		return "redirect:/home";
 	}
-	
-    @GetMapping("/books/{id}")
-    public String showPage(Model model, @PathVariable("id") Long id, HttpSession session) {
-    	if(session.getAttribute("userId") == null) {
-    		return "redirect:/";
-    	}
-    	Book book = bookSer.getOneBook(id);
-    	model.addAttribute("book", book);
-    	model.addAttribute("user", userSer.findById((Long)session.getAttribute("userId")));
-    	
-    	return "Book.jsp";
-    }
+
+	@GetMapping("/books/{id}")
+	public String showPage(Model model, @PathVariable("id") Long id, HttpSession session) {
+		if (session.getAttribute("userId") == null) {
+			return "redirect:/";
+		}
+		Book book = bookSer.getOneBook(id);
+		model.addAttribute("book", book);
+		model.addAttribute("user", userSer.findById((Long) session.getAttribute("userId")));
+
+		return "Book.jsp";
+	}
+
+	@GetMapping("/book/{id}/edit")
+	public String editBook(Model model, @PathVariable("id") Long id, HttpSession session) {
+		if (session.getAttribute("userId") == null) {
+			return "redirect:/";
+		}
+		Book book = bookSer.getOneBook(id);
+		model.addAttribute("book", book);
+		User user = userSer.findById((Long) session.getAttribute("userId"));
+		model.addAttribute("user", user);
+		return "FormEditBook.jsp";
+	}
+
+	@PutMapping("/book/{id}/update")
+	public String updateBook(@Valid Model model, @ModelAttribute("book") Book book, BindingResult result,
+			HttpSession session) {
+		if (session.getAttribute("userId") == null) {
+			return "redirect:/";
+		}
+		if (result.hasErrors()) {
+			return "FormEditBook.jsp";
+		}
+		bookSer.editBook(book);
+
+		return "redirect:/home";
+	}
+
+	@GetMapping("/book/{id}/delete")
+	public String deleteBook(@PathVariable("id") Long id, HttpSession session) {
+		if (session.getAttribute("userId") == null) {
+			return "redirect:/";
+		}
+		bookSer.deleteBook(id);
+		return "redirect:/home";
+	}
+
+	@GetMapping("/book/{id}/borrow")
+	public String borrowBook(@PathVariable("id") Long id, HttpSession session) {
+		if (session.getAttribute("userId") == null) {
+			return "redirect:/";
+		}
+		Book book = bookSer.getOneBook(id);
+		book.setBorrower(userSer.findById((Long) session.getAttribute("userId")));
+		bookSer.editBook(book);
+		return "redirect:/home";
+	}
+
+	@GetMapping("/book/{id}/return")
+	public String returnBook(@PathVariable("id") Long id, HttpSession session) {
+		if (session.getAttribute("userId") == null) {
+			return "redirect:/";
+		}
+		Book book = bookSer.getOneBook(id);
+		book.setBorrower(null);
+		bookSer.editBook(book);
+		return "redirect:/home";
+
+	}
 
 }

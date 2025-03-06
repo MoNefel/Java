@@ -17,11 +17,9 @@
     <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-
 	<div class="container">
 		<h1><c:out value="${book.title}"/></h1>
-		
-		
+			
 		<a href="/home">back to shelves</a>
 		<h3><c:out value="${book.user.userName}"/> read <c:out value="${book.title}" /> by <c:out value="${book.authorName }" /></h3>
 		<div class="container">
@@ -34,6 +32,5 @@
 		</div>
 		
 	</div>
-
 </body>
 </html>
